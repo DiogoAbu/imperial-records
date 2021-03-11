@@ -1,10 +1,10 @@
-<h1 align="center">ImperialRecords</h1><br>
+<h1 align="center">Imperial Records</h1><br>
 <p align="center">
-  <img alt="ImperialRecords" title="ImperialRecords" src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="192">
+  <img alt="Imperial Records" title="Imperial Records" src="android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="192">
 </p>
 
 <p align="center">
-  Some awesome short description.
+  Learn all you never knew about Star Wars!
 </p>
 
 <p align="center">
@@ -13,16 +13,6 @@
   </a>
   <a href="https://github.com/DiogoAbu/imperial-records/actions">
     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/DiogoAbu/imperial-records/Build%20Android?label=Build%20Android&style=flat-square">
-  </a>
-</p>
-
-<p align="center">
-  <a href="#CHANGE_ITUNES_APP_STORE_LINK">
-    <img alt="Download on the App Store" title="App Store" src="http://i.imgur.com/0n2zqHD.png" width="140">
-  </a>
-
-  <a href="#CHANGE_GOOGLE_PLAY_STORE_LINK">
-    <img alt="Get it on Google Play" title="Google Play" src="http://i.imgur.com/mtGRPuM.png" width="140">
   </a>
 </p>
 
@@ -38,25 +28,17 @@
 
 ## 🚀 Introduction
 
-Description of what your project does.
-
-**Available for both iOS and Android.**
+This app puts all the knowledge of the stars in you hands. Learn about the characters, starships, and more!
 
 <p align="center">
-  <img src="#CHANGE_PROMOTIONAL_SCREENSHOT" width="350">
+  <img src=".github/assets/screenshot_01.png" width="700">
 </p>
 
 ## 🎨 Features
 
-* This!
-* And this.
-* That too!
-* Also this.
-* And that.
-
-<p align="center">
-  <img src="#CHANGE_OVERVIEW_SCREENSHOT" width="700">
-</p>
+* We have data about People, Vehicles, Starships, Planets and more!
+* As you browse the data is stored for offline use.
+* Comes with support for you favorite language: Aurebesh.
 
 ## 💬 Contributing
 

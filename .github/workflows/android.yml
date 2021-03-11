@@ -19,6 +19,7 @@ jobs:
   release:
     name: Build
     runs-on: ubuntu-latest
+    if: secrets.UPLOAD_TO_RELEASE == 'true' || secrets.UPLOAD_TO_GOOGLE == 'true'
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
@@ -85,6 +86,14 @@ jobs:
       - name: Display prerelease
         run: echo ${{ steps.get-prerelease.outputs.is-prerelease }}
 
+      - name: Decrypt dotenv for staging or production
+        run: |
+          [[ -z "$DOTENV" ]] && exit 0
+          echo "$DOTENV" | base64 --decode > ./.env
+          chmod 600 ./.env
+        env:
+          DOTENV: ${{ (steps.get-prerelease.outputs.is-prerelease == 'true' && secrets.DOTENV_STAGING) || secrets.DOTENV_PROD }}
+
       - name: Decrypt release keystore
         run: |
           echo "$RELEASE_JKS" | base64 --decode > ./android/app/release.jks
@@ -100,15 +109,17 @@ jobs:
         env:
           GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
 
-      - name: Decrypt dotenv for staging or production
+      - name: Decrypt google play service account
+        if: secrets.UPLOAD_TO_GOOGLE == 'true'
         run: |
-          [[ -z "$DOTENV" ]] && exit 0
-          echo "$DOTENV" | base64 --decode > ./.env
-          chmod 600 ./.env
+          [[ -z "$GOOGLE_PLAY_SERVICE_ACCOUNT" ]] && exit 0
+          echo "$GOOGLE_PLAY_SERVICE_ACCOUNT" | base64 --decode > ./google-play-service-account.json
+          chmod 600 ./google-play-service-account.json
         env:
-          DOTENV: ${{ (steps.get-prerelease.outputs.is-prerelease == 'true' && secrets.DOTENV_STAGING) || secrets.DOTENV_PROD }}
+          GOOGLE_PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
 
       - name: Generate APK
+        if: secrets.UPLOAD_TO_RELEASE == 'true'
         run: ./gradlew assembleRelease --no-daemon
         working-directory: ./android
         env:
@@ -116,8 +127,27 @@ jobs:
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
 
       - name: Upload APK to Release tagged with current version
+        if: secrets.UPLOAD_TO_RELEASE == 'true'
         uses: AButler/upload-release-assets@v2.0
         with:
           files: "./android/app/build/outputs/apk/release/*.apk"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           release-tag: ${{ steps.get-version.outputs.VERSION }}
+
+      - name: Generate AAB
+        if: secrets.UPLOAD_TO_GOOGLE == 'true'
+        run: ./gradlew bundleRelease --no-daemon
+        working-directory: ./android
+        env:
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+
+      - name: Upload AAB to Google Play
+        if: secrets.UPLOAD_TO_GOOGLE == 'true'
+        uses: DiogoAbu/upload-google-play
+        with:
+          packageName: com.imperialrecords
+          releaseFiles: ./android/app/build/outputs/bundle/release/*.aab
+          mappingFile: ./android/app/build/outputs/mapping/release/mapping.txt
+          serviceAccountJson: ./google-play-service-account.json
+          track: ${{ (steps.get-prerelease.outputs.is-prerelease == 'true' && 'alpha') || 'production' }}

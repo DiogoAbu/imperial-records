@@ -18,3 +18,13 @@
   **[] $VALUES;
   public *;
 }
+
+## https://github.com/luggit/react-native-config
+-keep class com.imperialrecords.BuildConfig { *; }
+#-keepresources string/build_config_package
+
+## https://github.com/react-native-linear-gradient/react-native-linear-gradient
+-keep class com.BV.LinearGradient.* {*;}
+
+## https://github.com/software-mansion/react-native-reanimated
+-keep class com.facebook.react.turbomodule.** { *; }

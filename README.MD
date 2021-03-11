@@ -46,4 +46,6 @@ Would like to help make this app better? Please take a look at the [contributing
 
 ## ❤️ Acknowledgments
 
-Give someone a thanks!
+* Tycho Ordo for the [Aurebesh font](https://boards.theforce.net/threads/updated-new-aurebesh-font.50009464/)
+* Data by [SWAPI](https://swapi.dev)
+* Images by [Unsplash](https://unsplash.com)

@@ -1,35 +1,52 @@
-import React, { FC } from 'react';
-import { FlatList, View } from 'react-native';
+import React, { FC, useEffect } from 'react';
+import { ScrollView } from 'react-native';
 
-import Separator from '!/components/Separator';
-import Text from '!/components/Text';
-import useStatusBarStyle from '!/hooks/use-status-bar-style';
+import { useNavigation } from '@react-navigation/core';
+import { HeaderBackButton } from '@react-navigation/stack';
 
-import HomeItem from './HomeItem';
+import Icon from '!/components/Icon';
+import usePress from '!/hooks/use-press';
+import { MainNavigationProp } from '!/types';
+
+import ResourceItem from './ResourceItem';
 import styles from './styles';
 
-const keyExtractor = (_item: number, index: number) => index.toString();
-
 const Home: FC = () => {
-  useStatusBarStyle();
+  const navigation = useNavigation<MainNavigationProp<'Home'>>();
+
+  const handleGoToSettings = usePress(() => {
+    requestAnimationFrame(() => {
+      navigation.navigate('Settings');
+    });
+  });
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: 'Imperial Records',
+      headerRight: ({ tintColor }) => (
+        <HeaderBackButton
+          backImage={() => <Icon color={tintColor} name='menu' size={28} />}
+          labelVisible={false}
+          onPress={handleGoToSettings}
+        />
+      ),
+    });
+  }, [handleGoToSettings, navigation]);
 
   return (
-    <FlatList
-      data={Array(20)}
-      ItemSeparatorComponent={Separator}
-      keyExtractor={keyExtractor}
-      ListHeaderComponent={
-        <>
-          <View style={styles.headerContent}>
-            <Text style={styles.headerText}>Welcome to TestApp!</Text>
-          </View>
+    <ScrollView style={styles.contentContainer}>
+      <ResourceItem resource='people' />
 
-          <Separator />
-        </>
-      }
-      renderItem={(props) => <HomeItem {...props} />}
-      style={styles.contentContainer}
-    />
+      <ResourceItem resource='species' />
+
+      <ResourceItem resource='vehicles' />
+
+      <ResourceItem resource='starships' />
+
+      <ResourceItem resource='planets' />
+
+      <ResourceItem resource='films' />
+    </ScrollView>
   );
 };
 

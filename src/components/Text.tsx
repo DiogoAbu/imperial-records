@@ -1,20 +1,33 @@
 import React, { FC } from 'react';
-import { StyleProp, Text as NativeText, TextStyle } from 'react-native';
+import { Animated, StyleSheet, Text as NativeText, TextProps } from 'react-native';
 
 import { useTheme } from '@react-navigation/native';
 
-interface Props {
-  style: StyleProp<TextStyle>;
+import useFontFamily from '!/hooks/use-font-family';
+
+const AnimatedText = Animated.createAnimatedComponent(NativeText);
+
+interface Props extends TextProps {
+  animated?: boolean;
 }
 
-const Text: FC<Props> = ({ children, style, ...rest }) => {
+const Text: FC<Props> = ({ children, style, animated, ...rest }) => {
   const { colors } = useTheme();
+  const { fontFamily } = useFontFamily();
+
+  const Component = animated ? AnimatedText : NativeText;
 
   return (
-    <NativeText {...rest} style={[{ color: colors.text }, style]}>
+    <Component {...rest} style={[{ fontFamily, color: colors.text }, styles.text, style]}>
       {children}
-    </NativeText>
+    </Component>
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 16,
+  },
+});
 
 export default Text;

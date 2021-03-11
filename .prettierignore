@@ -32,3 +32,5 @@ generated/**
 !.prettierrc
 !.commitlintrc.js
 !.releaserc.json
+
+src/assets/fonts/**

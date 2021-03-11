@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fireEvent, render, waitFor } from '@testing-library/react-native';
+import { render, waitFor } from '@testing-library/react-native';
 
 import App from '../src/App';
 
@@ -9,15 +9,8 @@ it('renders/navigates throughout app screens', async () => {
   const { getByText } = render(<App />);
 
   // Check what is rendered
-  const welcomeText = getByText(/Welcome to ImperialRecords/i);
-  expect(welcomeText).not.toBeNull();
-
-  // Change screen
-  fireEvent.press(getByText(/#0/i));
-
   await waitFor(() => {
-    // Check what is rendered
-    const indexText = getByText(/Index #/i);
-    expect(indexText.props.children).toEqual(['Index #', 0]);
+    const welcomeText = getByText(/Imperial Records/i);
+    expect(welcomeText).not.toBeNull();
   });
 });

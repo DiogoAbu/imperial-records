@@ -1,24 +1,63 @@
 import React, { FC } from 'react';
 
-import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import { useTheme } from '@react-navigation/native';
+import { CardStyleInterpolators } from '@react-navigation/stack';
 
+import Icon from '!/components/Icon';
+import useFontFamily from '!/hooks/use-font-family';
 import Details from '!/screens/Details/Details';
 import Home from '!/screens/Home/Home';
+import ResourceList from '!/screens/ResourceList/ResourceList';
+import Settings from '!/screens/Settings/Settings';
 import { MainStackParams } from '!/types';
 
-const Stack = createStackNavigator<MainStackParams>();
+const Stack = createSharedElementStackNavigator<MainStackParams>();
 
 const MainStack: FC = () => {
+  const { colors } = useTheme();
+  const { fontFamily } = useFontFamily();
+
   return (
     <Stack.Navigator
       headerMode='screen'
       initialRouteName='Home'
       screenOptions={{
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        headerTintColor: colors.primary,
+        headerTitleStyle: { fontFamily },
+        headerBackTitleVisible: false,
+        headerBackImage: ({ tintColor }) => <Icon color={tintColor} name='chevron-left' />,
       }}
     >
       <Stack.Screen component={Home} name='Home' />
-      <Stack.Screen component={Details} name='Details' />
+
+      <Stack.Screen
+        component={ResourceList}
+        name='ResourceList'
+        sharedElements={(route, otherRoute) => {
+          if (otherRoute.name !== 'Details') {
+            const resource = route.params.resource as string;
+            return [`${resource}.background.image`];
+          }
+          return [];
+        }}
+      />
+
+      <Stack.Screen
+        component={Details}
+        name='Details'
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
+
+      <Stack.Screen
+        component={Settings}
+        name='Settings'
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}
+      />
     </Stack.Navigator>
   );
 };

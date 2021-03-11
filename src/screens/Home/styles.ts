@@ -15,8 +15,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  itemText: {
+  resourceBackground: {
+    justifyContent: 'flex-end',
+    height: 224,
+  },
+  resourceText: {
     padding: constants.grid,
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  resourceOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: constants.darkOverlay,
   },
 });
 

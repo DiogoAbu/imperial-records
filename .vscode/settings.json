@@ -34,5 +34,10 @@
   "editor.formatOnSave": true,
   "eslint.format.enable": true,
   "eslint.onIgnoredFiles": "warn",
-  "tslint.enable": false
+  "eslint.packageManager": "yarn",
+  "npm.packageManager": "yarn",
+  "tslint.enable": false,
+  "xmlTools.enforcePrettySelfClosingTagOnFormat": true,
+  "xmlTools.splitAttributesOnFormat": true,
+  "xmlTools.splitXmlnsOnFormat": true
 }

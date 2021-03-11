@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { SharedElement } from 'react-navigation-shared-element';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 
 import ResourceCard from '!/components/ResourceCard';
 import SlideIn from '!/components/SlideIn';

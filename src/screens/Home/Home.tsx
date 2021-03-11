@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import { HeaderBackButton } from '@react-navigation/stack';
 
 import Icon from '!/components/Icon';

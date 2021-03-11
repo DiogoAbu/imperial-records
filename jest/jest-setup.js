@@ -29,3 +29,5 @@ jest.mock('react-native-bootsplash', () => {
 });
 
 jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
+
+jest.mock('@react-native-community/masked-view', () => ({}));

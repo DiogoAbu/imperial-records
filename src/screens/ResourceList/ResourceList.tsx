@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { Animated, BackHandler, InteractionManager } from 'react-native';
 
 import { SharedElement } from 'react-navigation-shared-element';
-import { useNavigation, useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import HeaderBackIcon from '!/components/HeaderBackIcon';
 import Loading from '!/components/Loading';

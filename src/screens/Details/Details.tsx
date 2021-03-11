@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { InteractionManager, ScrollView } from 'react-native';
 
-import { useNavigation, useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { HeaderBackButton } from '@react-navigation/stack';
 
 import Icon from '!/components/Icon';

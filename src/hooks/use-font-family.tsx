@@ -7,7 +7,7 @@ interface FontFamilyState {
   setFontFamily: React.Dispatch<React.SetStateAction<FontFamilyState['fontFamily']>>;
 }
 
-const FontFamilyContext = createContext<FontFamilyState | undefined>(undefined);
+export const FontFamilyContext = createContext<FontFamilyState | undefined>(undefined);
 
 const storageKey = 'fontFamily';
 

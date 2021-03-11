@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { useTheme } from '@react-navigation/native';
 import { CardStyleInterpolators } from '@react-navigation/stack';
@@ -15,7 +16,7 @@ import { MainStackParams } from '!/types';
 const Stack = createSharedElementStackNavigator<MainStackParams>();
 
 const MainStack: FC = () => {
-  const { colors } = useTheme();
+  const { colors, dark } = useTheme();
   const { fontFamily } = useFontFamily();
 
   return (
@@ -23,7 +24,8 @@ const MainStack: FC = () => {
       headerMode='screen'
       initialRouteName='Home'
       screenOptions={{
-        headerTintColor: colors.primary,
+        headerTintColor: dark ? colors.primary : Colors.white,
+        headerStyle: { backgroundColor: dark ? colors.card : colors.primary },
         headerTitleStyle: { fontFamily },
         headerBackTitleVisible: false,
         headerBackImage: ({ tintColor }) => <Icon color={tintColor} name='chevron-left' />,

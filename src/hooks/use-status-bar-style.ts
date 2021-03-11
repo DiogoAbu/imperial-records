@@ -14,7 +14,7 @@ export default function useStatusBarStyle(): void {
     if (Platform.OS === 'android') {
       StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.5)');
     }
-    StatusBar.setBarStyle(dark ? 'light-content' : 'dark-content');
+    StatusBar.setBarStyle('light-content');
 
     changeNavigationBarColor(colors.card, !dark, false);
   }, [colorScheme]);

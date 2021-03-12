@@ -25,7 +25,7 @@ const PlanetItem: ListRenderItem<Planet> = ({ item }) => {
       descriptionStyle={{ color: colors.primary }}
       onPress={handleGoToDetails}
       right={() => <Icon color={colors.primary} name='chevron-right' />}
-      title={item.name}
+      title={capitalize(item.name)}
     />
   );
 };

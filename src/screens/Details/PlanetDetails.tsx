@@ -31,14 +31,14 @@ const PlanetDetails: FC<Props> = ({ result, shouldLoad }) => {
         centerStyle={styles.itemCenter}
         description='name'
         descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
-        title={result.name}
+        title={capitalize(result.name)}
       />
 
       <ListItem
         centerStyle={styles.itemCenter}
         description='population'
         descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
-        title={parseFloat(result.population).toLocaleString()}
+        title={result.population === 'unknown' ? 'Unknown' : parseFloat(result.population).toLocaleString()}
       />
 
       <View style={styles.rowContainer}>
@@ -47,14 +47,14 @@ const PlanetDetails: FC<Props> = ({ result, shouldLoad }) => {
           description='diameter'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.diameter).toLocaleString()}
+          title={result.diameter === 'unknown' ? 'Unknown' : parseFloat(result.diameter).toLocaleString()}
         />
         <ListItem
           centerStyle={styles.itemCenter}
           description='gravity'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={result.gravity}
+          title={capitalize(result.gravity)}
         />
       </View>
 
@@ -81,14 +81,22 @@ const PlanetDetails: FC<Props> = ({ result, shouldLoad }) => {
           description='rotation period'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.rotation_period).toLocaleString()}
+          title={
+            result.rotation_period === 'unknown'
+              ? 'Unknown'
+              : parseFloat(result.rotation_period).toLocaleString()
+          }
         />
         <ListItem
           centerStyle={styles.itemCenter}
           description='orbital period'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.orbital_period).toLocaleString()}
+          title={
+            result.orbital_period === 'unknown'
+              ? 'Unknown'
+              : parseFloat(result.orbital_period).toLocaleString()
+          }
         />
       </View>
 

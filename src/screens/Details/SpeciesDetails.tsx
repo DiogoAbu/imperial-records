@@ -31,7 +31,7 @@ const SpeciesDetails: FC<Props> = ({ result, shouldLoad }) => {
         centerStyle={styles.itemCenter}
         description='name'
         descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
-        title={result.name}
+        title={capitalize(result.name)}
       />
 
       <ListItem

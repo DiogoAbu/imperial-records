@@ -31,7 +31,7 @@ const StarshipDetails: FC<Props> = ({ result, shouldLoad }) => {
         centerStyle={styles.itemCenter}
         description='name'
         descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
-        title={result.name}
+        title={capitalize(result.name)}
       />
 
       <View style={styles.rowContainer}>
@@ -64,7 +64,11 @@ const StarshipDetails: FC<Props> = ({ result, shouldLoad }) => {
           description='max speed'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.max_atmosphering_speed).toLocaleString()}
+          title={
+            result.max_atmosphering_speed === 'unknown'
+              ? 'Unknown'
+              : parseFloat(result.max_atmosphering_speed).toLocaleString()
+          }
         />
       </View>
 
@@ -74,14 +78,18 @@ const StarshipDetails: FC<Props> = ({ result, shouldLoad }) => {
           description='Megalight per hour'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.MGLT).toLocaleString()}
+          title={result.MGLT === 'unknown' ? 'Unknown' : parseFloat(result.MGLT).toLocaleString()}
         />
         <ListItem
           centerStyle={styles.itemCenter}
           description='hyperdrive rating'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.hyperdrive_rating).toLocaleString()}
+          title={
+            result.hyperdrive_rating === 'unknown'
+              ? 'Unknown'
+              : parseFloat(result.hyperdrive_rating).toLocaleString()
+          }
         />
       </View>
 
@@ -91,7 +99,7 @@ const StarshipDetails: FC<Props> = ({ result, shouldLoad }) => {
           description='length'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.length).toLocaleString()}
+          title={result.length === 'unknown' ? 'Unknown' : parseFloat(result.length).toLocaleString()}
         />
         <ListItem
           centerStyle={styles.itemCenter}
@@ -129,14 +137,14 @@ const StarshipDetails: FC<Props> = ({ result, shouldLoad }) => {
           description='crew'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.crew).toLocaleString()}
+          title={result.crew === 'unknown' ? 'Unknown' : parseFloat(result.crew).toLocaleString()}
         />
         <ListItem
           centerStyle={styles.itemCenter}
           description='passengers'
           descriptionStyle={[styles.itemDescription, { color: colors.primary }]}
           style={styles.rowItem}
-          title={parseFloat(result.passengers).toLocaleString()}
+          title={result.passengers === 'unknown' ? 'Unknown' : parseFloat(result.passengers).toLocaleString()}
         />
       </View>
 

@@ -42,7 +42,7 @@ const ResourceList: FC = () => {
   const { fontFamily } = useFontFamily();
 
   const [isBackIconVisible, setIsBackIconVisible] = useState(false);
-  const [renderLoading, setRenderLoading] = useState(false);
+  const [renderFullscreenLoading, setRenderFullscreenLoading] = useState(false);
 
   const [response, setResponse] = useState<ResourceMultiple<typeof resource> | null>(null);
 
@@ -63,7 +63,6 @@ const ResourceList: FC = () => {
   });
 
   const fetchNextPage = useMethod(() => {
-    console.log('next page', response?.next);
     if (response?.next) {
       const page = getNumberFromUrl(response.next).toString();
 
@@ -86,13 +85,7 @@ const ResourceList: FC = () => {
 
     void InteractionManager.runAfterInteractions(() => {
       setIsBackIconVisible(true);
-      setRenderLoading(true);
-    });
-
-    void chooseRequest(resource)().then((res: ResourceMultiple<typeof resource>) => {
-      requestAnimationFrame(() => {
-        setResponse(res);
-      });
+      setRenderFullscreenLoading(true);
     });
 
     return () => {
@@ -104,7 +97,13 @@ const ResourceList: FC = () => {
     navigation.setOptions({
       headerShown: false,
     });
-  }, [navigation]);
+
+    void chooseRequest(resource)().then((res: ResourceMultiple<typeof resource>) => {
+      requestAnimationFrame(() => {
+        setResponse(res);
+      });
+    });
+  }, [navigation, resource]);
 
   return (
     <>
@@ -114,7 +113,7 @@ const ResourceList: FC = () => {
         extraData={fontFamily}
         ItemSeparatorComponent={Separator}
         keyExtractor={(_, index) => `item${index}`}
-        ListEmptyComponent={renderLoading ? <Loading /> : null}
+        ListEmptyComponent={renderFullscreenLoading ? <Loading /> : null}
         ListFooterComponent={response?.next ? <Loading size={16} /> : null}
         onEndReached={fetchNextPage}
         onEndReachedThreshold={0.2}

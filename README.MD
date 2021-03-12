@@ -8,12 +8,22 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/DiogoAbu/imperial-records/releases">
+  <a href="https://github.com/DiogoAbu/imperial-records/releases/latest">
     <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/DiogoAbu/imperial-records?sort=semver&style=flat-square">
   </a>
-  <a href="https://github.com/DiogoAbu/imperial-records/actions">
+  <a href="https://github.com/DiogoAbu/imperial-records/actions/workflows/android.yml">
     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/DiogoAbu/imperial-records/Build%20Android?label=Build%20Android&style=flat-square">
   </a>
+</p>
+
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.imperialrecords">
+    <img alt="Get it on Google Play" title="Google Play" src=".github/assets/get-on-google-play.png" width="140">
+  </a>
+
+  <!-- <a href="#CHANGE_ITUNES_APP_STORE_LINK">
+    <img alt="Download on the App Store" title="App Store" src=".github/assets/get-on-app-store.png" width="140">
+  </a> -->
 </p>
 
 <!-- [BEGIN] Don't edit this section, instead run Markdown AIO: Update Table of Contents -->

@@ -18,7 +18,7 @@ env:
 jobs:
   release:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: secrets.UPLOAD_TO_RELEASE == 'true' || secrets.UPLOAD_TO_GOOGLE == 'true'
     steps:
       - name: Checkout the repo

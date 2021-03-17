@@ -160,7 +160,7 @@ jobs:
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
 
       - name: Upload AAB to Google Play
-        uses: DiogoAbu/upload-google-play
+        uses: DiogoAbu/upload-google-play@053164334a899567ff29ea0e7201f215017e91b4
         if: env.UPLOAD_TO_GOOGLE == 'true'
         with:
           packageName: com.imperialrecords

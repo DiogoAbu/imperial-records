@@ -17,9 +17,9 @@
 </p>
 
 <p align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.imperialrecords">
+  <!-- <a href="https://play.google.com/store/apps/details?id=com.imperialrecords">
     <img alt="Get it on Google Play" title="Google Play" src=".github/assets/get-on-google-play.png" width="140">
-  </a>
+  </a> -->
 
   <!-- <a href="#CHANGE_ITUNES_APP_STORE_LINK">
     <img alt="Download on the App Store" title="App Store" src=".github/assets/get-on-app-store.png" width="140">

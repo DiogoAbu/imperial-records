@@ -143,8 +143,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
-        versionCode 1
-        versionName "0.1.1"
+        versionCode 1002
+        versionName "0.1.2"
         archivesBaseName = "ImperialRecords-v$versionName"
 
         /**

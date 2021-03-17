@@ -14,12 +14,14 @@ on:
 env:
   node-version: "12"
   java-version: "1.8"
+  UPLOAD_TO_RELEASE: ${{ secrets.UPLOAD_TO_RELEASE }}
+  UPLOAD_TO_GOOGLE: ${{ secrets.UPLOAD_TO_GOOGLE }}
 
 jobs:
   release:
     name: Build
     runs-on: ubuntu-20.04
-    if: secrets.UPLOAD_TO_RELEASE == 'true' || secrets.UPLOAD_TO_GOOGLE == 'true'
+    if: env.UPLOAD_TO_RELEASE == 'true' || env.UPLOAD_TO_GOOGLE == 'true'
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
@@ -110,7 +112,7 @@ jobs:
           GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
 
       - name: Decrypt google play service account
-        if: secrets.UPLOAD_TO_GOOGLE == 'true'
+        if: env.UPLOAD_TO_GOOGLE == 'true'
         run: |
           [[ -z "$GOOGLE_PLAY_SERVICE_ACCOUNT" ]] && exit 0
           echo "$GOOGLE_PLAY_SERVICE_ACCOUNT" | base64 --decode > ./google-play-service-account.json
@@ -119,7 +121,7 @@ jobs:
           GOOGLE_PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
 
       - name: Generate APK
-        if: secrets.UPLOAD_TO_RELEASE == 'true'
+        if: env.UPLOAD_TO_RELEASE == 'true'
         run: ./gradlew assembleRelease --no-daemon
         working-directory: ./android
         env:
@@ -127,7 +129,7 @@ jobs:
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
 
       - name: Upload APK to Release tagged with current version
-        if: secrets.UPLOAD_TO_RELEASE == 'true'
+        if: env.UPLOAD_TO_RELEASE == 'true'
         uses: AButler/upload-release-assets@v2.0
         with:
           files: "./android/app/build/outputs/apk/release/*.apk"
@@ -135,7 +137,7 @@ jobs:
           release-tag: ${{ steps.get-version.outputs.VERSION }}
 
       - name: Generate AAB
-        if: secrets.UPLOAD_TO_GOOGLE == 'true'
+        if: env.UPLOAD_TO_GOOGLE == 'true'
         run: ./gradlew bundleRelease --no-daemon
         working-directory: ./android
         env:
@@ -143,7 +145,7 @@ jobs:
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
 
       - name: Upload AAB to Google Play
-        if: secrets.UPLOAD_TO_GOOGLE == 'true'
+        if: env.UPLOAD_TO_GOOGLE == 'true'
         uses: DiogoAbu/upload-google-play
         with:
           packageName: com.imperialrecords
